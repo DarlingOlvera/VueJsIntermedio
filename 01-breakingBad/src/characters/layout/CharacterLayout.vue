@@ -23,7 +23,13 @@ const routeLinks: RouteLink[] = characterRoute.children!
       :show-icon="false"
       :links="routeLinks" />
 
+    <!--suspense aun es experimental al dia de hoy 13 marzo 2023-->
+    <!-- <Suspense>
+        <RouterView/>
+    </Suspense> -->
+
     <RouterView/>
+    
 </template>
 
 
