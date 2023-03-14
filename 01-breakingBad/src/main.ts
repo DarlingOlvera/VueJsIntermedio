@@ -4,7 +4,23 @@ import router from './router'
 import './assets/main.css'
 import {VueQueryPlugin} from '@tanstack/vue-query'
 
-createApp(App)
-.use(VueQueryPlugin)
-.use(router)
-.mount('#app')
+const app = createApp(App)
+
+import '@/store/quotes.store'
+
+//configuracion vue-query global
+VueQueryPlugin.install(app,{
+    queryClientConfig:{
+        defaultOptions:{
+            queries:{
+                cacheTime: 1000 * 20,
+                refetchOnReconnect: 'always'
+            },
+
+        }
+    }
+})
+
+
+app.use(router)
+app.mount('#app')

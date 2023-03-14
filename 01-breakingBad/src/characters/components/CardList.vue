@@ -1,9 +1,16 @@
 <script setup lang="ts">
-import QuoteCard from '@/characters/components/QuoteCard.vue'
-import breakingBadApi from '@/api/breakingBadApi';
-import type {Quote} from '@/characters/interfaces/quotes'
+//import breakingBadApi from '@/api/breakingBadApi';
 //import { useQuotes } from '@/characters/composables/useQuotes';
-import { useQuery } from '@tanstack/vue-query';
+//import { useQuery } from '@tanstack/vue-query';
+
+import QuoteCard from '@/characters/components/QuoteCard.vue'
+import type {Quote} from '@/characters/interfaces/quotes'
+
+interface Props{
+    quotes:Quote[],
+}
+const props = defineProps<Props>();
+
 
 //1.uso con suspense
 //const {data: quotes} = await breakingBadApi.get<Quote[]>('/5')
@@ -13,7 +20,7 @@ import { useQuery } from '@tanstack/vue-query';
 
 //3. uso tanstack vue-query
 
-const getQuotesSlow = async():Promise<Quote[]> => {
+/* const getQuotesSlow = async():Promise<Quote[]> => {
     
     return new Promise ((resolve) =>{
         
@@ -28,20 +35,16 @@ const getQuotesSlow = async():Promise<Quote[]> => {
 const {isLoading,data:quotes} = useQuery(
     ['quotes'],
     getQuotesSlow,
-    {
-        cacheTime: 1000 * 60,
-        refetchOnReconnect: 'always' 
-    }
-)
+) */
 
 </script>
 
 <template>
-    <h1 v-if="isLoading">Loading...</h1>
+   <!--  <h1 v-if="isLoading">Loading...</h1> -->
 
     <div class="card-list">
         <QuoteCard
-          v-for="q of quotes"
+          v-for="q of props.quotes"
           :key="q.quote"
           :quote="q" />
     </div>
