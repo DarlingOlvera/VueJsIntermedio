@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import { useCounterOptionsStore } from '@/store/counter-options';
+import { useCounterSetupStore } from '@/store/counter-setup';
 import { storeToRefs } from 'pinia';
-import CounterOptionsValue from '@/counter/components/CounterOptionsValue.vue';
+import CounterSetupValue from '@/counter/components/CounterSetupValue.vue';
 
-const counterOptions = useCounterOptionsStore();
+const counterSetup = useCounterSetupStore();
 
 //NOTA: no se pueden desestructurar los getters o states porque se pierde su reactividad
 //si se pueden desestructurar las acciones
 
 //una forma de hacerlo sin perder la reactividad es con el uso de refs
-const {count, squareCount} = storeToRefs (counterOptions)
+const {count, squareCount} = storeToRefs (counterSetup)
 </script>
 
 <template>
-    <h1>Pinia Options</h1>
+    <h1>Pinia Setup</h1>
     <h2>Counter: {{ count }}</h2>
     <h4>Square Counter: {{ squareCount }}</h4>
     <br>
-    <button @click="counterOptions.increment()">+1</button>
-    <button @click="counterOptions.incrementBy(2)">+2</button>
-    <button @click="counterOptions.incrementBy(5)">+5</button>
-    <button @click="counterOptions.$reset()">Reset</button>
+    <button @click="counterSetup.increment()">+1</button>
+    <button @click="counterSetup.incrementBy(2)">+2</button>
+    <button @click="counterSetup.incrementBy(5)">+5</button>
+    <button @click="counterSetup.$reset()">Reset</button>
 
     <br>
-    <CounterOptionsValue/>
+    <CounterSetupValue/>
 </template>
 
 
