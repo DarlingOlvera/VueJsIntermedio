@@ -1,4 +1,4 @@
-import {ref, computed} from 'vue';
+import {ref} from 'vue';
 import { defineStore } from 'pinia';
 import type {Client} from '@/clients/interfaces/client'
 
@@ -25,6 +25,8 @@ export const useClientsStore = defineStore('clients',()=>{
         },
         setPage(page:number){
             if(currentPage.value === page) return;
+            if(page <= 0) return;
+            if(page > totalPages.value) return;
 
             currentPage.value = page
         }
