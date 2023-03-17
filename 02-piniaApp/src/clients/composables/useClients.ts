@@ -1,6 +1,6 @@
 //uso de composables para reutilizar codigo de una manera más limpia
 
-import {watch, computed} from 'vue';
+import {watch} from 'vue';
 import {useQuery} from '@tanstack/vue-query'
 import clientsApi from '@/api/clients-api'
 import type {Client} from '@/clients/interfaces/client'
@@ -11,9 +11,9 @@ import { storeToRefs } from 'pinia'
 const getClients = async(page:number): Promise<Client[]> =>{
 
     //hacer la peticion un poco mas lenta
-    /* await new Promise(resolve =>{
-        setTimeout(() => resolve(true), 1500 )
-    })  */
+   /*   await new Promise(resolve =>{
+        setTimeout(() => resolve(true), 2500 )
+    })   */
 
     const {data} = await clientsApi<Client[]>(`/clients?_page=${page}`)
     return data
@@ -34,7 +34,7 @@ const useClients = () => {
     watch(data, clients =>{
         if(clients)
             store.setClients(clients);
-    })
+    },{immediate:true})
 
     return{
 
